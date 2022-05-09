@@ -13,33 +13,34 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, classification_report
 
-class BinaryClassification(nn.Module):
-    def __init__(self):
-        super(BinaryClassification, self).__init__()
-        # Number of input features is 12.
-        self.layer_1 = nn.Linear(330, 256) 
-        self.layer_2 = nn.Linear(256, 256)
-        self.layer_out = nn.Linear(256, 1) 
-        self.relu = nn.ReLU()
-        self.dropout = nn.Dropout(p=0.1)
-        self.batchnorm1 = nn.BatchNorm1d(256)
-        self.batchnorm2 = nn.BatchNorm1d(256)
-        
-    def forward(self, inputs):
-        x = self.relu(self.layer_1(inputs))
-        x = self.batchnorm1(x)
-        x = self.relu(self.layer_2(x))
-        x = self.batchnorm2(x)
-        x = self.dropout(x)
-        x = self.layer_out(x)
-        
-        return x
-
 class PythonPredictor:
+
+    class BinaryClassification(nn.Module):
+        def __init__(self):
+            super(self.BinaryClassification, self).__init__()
+            # Number of input features is 12.
+            self.layer_1 = nn.Linear(330, 256) 
+            self.layer_2 = nn.Linear(256, 256)
+            self.layer_out = nn.Linear(256, 1) 
+            self.relu = nn.ReLU()
+            self.dropout = nn.Dropout(p=0.1)
+            self.batchnorm1 = nn.BatchNorm1d(256)
+            self.batchnorm2 = nn.BatchNorm1d(256)
+            
+        def forward(self, inputs):
+            x = self.relu(self.layer_1(inputs))
+            x = self.batchnorm1(x)
+            x = self.relu(self.layer_2(x))
+            x = self.batchnorm2(x)
+            x = self.dropout(x)
+            x = self.layer_out(x)
+            
+            return x
+
 
     def __init__(self, config):
         """ Download pretrained model. """
-        self.model = BinaryClassification()
+        self.model = self.BinaryClassification()
         self.model = torch.load('Model.pt').autoshape()
 
     def predict(self, payload):
