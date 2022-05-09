@@ -5,7 +5,7 @@ class PythonPredictor:
 
     def __init__(self, config):
         """ Download pretrained model. """
-        self.model = torch.load('Model.pt').autoshape()
+        self.model = torch.load('Lodel.pt').autoshape()
 
     def predict(self, payload):
         """ Run a model based on url input. """
